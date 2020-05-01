@@ -12,7 +12,6 @@ filegroup(
     name = "toolchain_fg",
     srcs = [
         ":cc-compiler-armeabi-v7a",
-        ":cc-compiler-aarch64-linux-gnu",
         ":cc-compiler-k8",
         ":linaro_linux_linker_files_armv7",
         "@org_linaro_components_toolchain_gcc_armv7//:compiler_components",
@@ -33,7 +32,6 @@ cc_toolchain_suite(
     toolchains = {
         "k8": "cc-compiler-k8",
         "armeabi-v7a|gcc": "cc-compiler-armeabi-v7a",
-        "aarch64-linux-gnu|gcc": "cc-compiler-aarch64-linux-gnu",
         "k8|compiler": "cc-compiler-k8",
     },
     visibility = ["//visibility:public"],

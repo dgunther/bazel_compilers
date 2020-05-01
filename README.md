@@ -8,8 +8,7 @@ Requires bazel version >= 0.25.1.
 
 Supported compilers:
 
-* armv7hf: processor architecture used in the Raspberry Pi family of embedded products.
-* aarch64: processor architecture used in Jetson TX1 TX2 Xavier and Nano products.
+* armv7hf: processor architecture used in the TI AM335x family of embedded products.
 
 # usage
 
@@ -17,9 +16,9 @@ In your `WORKSPACE` file:
 
 ```
 http_archive(
-    name = "murtis_bazel_compilers",
+    name = "supervisor_bazel_compilers",
     urls = [
-      "https://github.com/curtismuntz/bazel_compilers/archive/<commit hash>.tar.gz",
+      "https://github.com/dgunther/bazel_compilers/archive/<commit hash>.tar.gz",
     ],
     strip_prefix = "bazel_compilers-< commit hash >",
 )
@@ -34,15 +33,10 @@ In your `.bazelrc` file:
 ```
 build --compiler=compiler
 
-build:armv7hf --crosstool_top=@murtis_bazel_compilers//compilers/arm_compiler:toolchain
+build:armv7hf --crosstool_top=@supervisor_bazel_compilers//compilers/arm_compiler:toolchain
 build:armv7hf --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 build:armv7hf --cpu=armeabi-v7a --compiler=gcc
 build:armv7hf --spawn_strategy=standalone
-
-build:aarch64 --crosstool_top=@murtis_bazel_compilers//compilers/arm_compiler:toolchain
-build:aarch64 --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
-build:aarch64 --cpu=aarch64-linux-gnu --compiler=gcc
-build:aarch64 --spawn_strategy=standalone
 ```
 
 
@@ -52,9 +46,8 @@ Build with:
 # locally executable:
 bazel build //example
 
-# Raspberry Pi:
+# BeagleBone:
 bazel build --config=armv7hf //example
 
-# Nvidia Jetson Products:
-bazel build --config=aarch64 //example
+
 ```

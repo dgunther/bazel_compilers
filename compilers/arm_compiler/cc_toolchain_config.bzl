@@ -33,8 +33,6 @@ load("@bazel_tools//tools/build_defs/cc:action_names.bzl", "ACTION_NAMES")
 def _impl(ctx):
     if (ctx.attr.cpu == "armeabi-v7a"):
         toolchain_identifier = "armeabi-v7a"
-    elif (ctx.attr.cpu == "aarch64-linux-gnu"):
-        toolchain_identifier = "aarch64-linux-gnu"
     elif (ctx.attr.cpu == "k8"):
         toolchain_identifier = "local"
     else:
@@ -42,16 +40,12 @@ def _impl(ctx):
 
     if (ctx.attr.cpu == "armeabi-v7a"):
         host_system_name = "armeabi-v7a"
-    elif (ctx.attr.cpu == "aarch64-linux-gnu"):
-        host_system_name = "aarch64-linux-gnu"
     elif (ctx.attr.cpu == "k8"):
         host_system_name = "local"
     else:
         fail("Unreachable")
 
     if (ctx.attr.cpu == "armeabi-v7a"):
-        target_system_name = "arm_a15"
-    elif (ctx.attr.cpu == "aarch64-linux-gnu"):
         target_system_name = "arm_a15"
     elif (ctx.attr.cpu == "k8"):
         target_system_name = "local"
@@ -60,16 +54,12 @@ def _impl(ctx):
 
     if (ctx.attr.cpu == "armeabi-v7a"):
         target_cpu = "armeabi-v7a"
-    elif (ctx.attr.cpu == "aarch64-linux-gnu"):
-        target_cpu = "aarch64-linux-gnu"
     elif (ctx.attr.cpu == "k8"):
         target_cpu = "k8"
     else:
         fail("Unreachable")
 
     if (ctx.attr.cpu == "armeabi-v7a"):
-        target_libc = "glibc_2.19"
-    elif (ctx.attr.cpu == "aarch64-linux-gnu"):
         target_libc = "glibc_2.19"
     elif (ctx.attr.cpu == "k8"):
         target_libc = "local"
@@ -80,14 +70,10 @@ def _impl(ctx):
         compiler = "compiler"
     elif (ctx.attr.cpu == "armeabi-v7a"):
         compiler = "gcc"
-    elif (ctx.attr.cpu == "aarch64-linux-gnu"):
-        compiler = "gcc"
     else:
         fail("Unreachable")
 
     if (ctx.attr.cpu == "armeabi-v7a"):
-        abi_version = "gcc"
-    elif (ctx.attr.cpu == "aarch64-linux-gnu"):
         abi_version = "gcc"
     elif (ctx.attr.cpu == "k8"):
         abi_version = "local"
@@ -95,8 +81,6 @@ def _impl(ctx):
         fail("Unreachable")
 
     if (ctx.attr.cpu == "armeabi-v7a"):
-        abi_libc_version = "glibc_2.19"
-    elif (ctx.attr.cpu == "aarch64-linux-gnu"):
         abi_libc_version = "glibc_2.19"
     elif (ctx.attr.cpu == "k8"):
         abi_libc_version = "local"
@@ -121,14 +105,6 @@ def _impl(ctx):
                 tool(path = "linaro_linux_gcc_armv7/arm-linux-gnueabihf-objcopy"),
             ],
         )
-    elif (ctx.attr.cpu == "aarch64-linux-gnu"):
-          objcopy_embed_data_action = action_config(
-              action_name = "objcopy_embed_data",
-              enabled = True,
-              tools = [
-                  tool(path = "linaro_linux_gcc_aarch64/aarch64-linux-gnu-objcopy"),
-              ],
-          )
     elif (ctx.attr.cpu == "k8"):
         objcopy_embed_data_action = action_config(
             action_name = "objcopy_embed_data",
